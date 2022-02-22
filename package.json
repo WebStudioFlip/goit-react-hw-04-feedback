@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-02-feedback",
+  "name": "goit-react-hw-04-feedback",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://webstudioflip/goit-react-hw-02-feedback/",
+  "homepage": "https://webstudioflip/goit-react-hw-04-feedback/",
   "author": "Pedchenko Yevhen <pedchenko.yevhen@gmail.com>",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",

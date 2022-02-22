@@ -18,7 +18,7 @@ FeedbackOptions.defaultProps = {
 }
 
 FeedbackOptions.propTypes = {       
-            options: PropTypes.array, 
+            options: PropTypes.object, 
             onLeaveFeedback:PropTypes.func,        
     
 }

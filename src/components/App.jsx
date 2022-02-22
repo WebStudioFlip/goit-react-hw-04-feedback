@@ -1,63 +1,71 @@
-import { Component } from "react";
-import Section from '../shared/Section'
-import Statistics from './Statistics'
-import  FeedbackOptions from './FeedbackOptions'
+import { useState } from 'react';
+import Section from '../shared/Section';
+import Statistics from './Statistics';
+import FeedbackOptions from './FeedbackOptions';
 
-
-class App extends Component {
-
-  state = {
+const App = () => {
+  const [votes, setVotes] = useState({
     good: 0,
     neutral: 0,
-    bad: 0    
-  }
+    bad: 0,
+  });
 
-    render () {
-      return (
-      <div className="App"  style={{
+  const countTotalFeedback = () => {
+    const total = Object.values(votes).reduce((previousValue, number) => {
+      return previousValue + number;
+    }, 0);
+    return total;
+  };
+  
+  const countPositiveFeedbackPercentage = () => {
+    const percentage = (votes['good'] * 100) / countTotalFeedback();
+    return percentage;
+  };
+  
+  const onBtnClick = property => {
+    setVotes(prevState => {
+      const value = prevState[property];  
+      return {
+        ...votes,
+        [property]: value + 1,
+      };
+    });
+  };
+
+  return (
+    <div
+      className="App"
+      style={{
         height: '100vh',
         display: 'flex',
         justifyContent: 'flex-start',
-        alignItems: 'flex-start', 
+        alignItems: 'flex-start',
         fontSize: 40,
         textTransform: 'uppercase',
         color: '#010101',
         flexDirection: 'column',
-        marginLeft: '20px'
-      }}>
-        <Section title="Please leave feedback">
-        <FeedbackOptions options={this.state} onLeaveFeedback={this.onBtnClick}/>
-        </Section>
-        <Section title="Statictics">
-        <Statistics good={this.state.good} neutral={this.state.neutral} bad={this.state.bad} total={this.countTotalFeedback()} positivePercentage={this.countPositiveFeedbackPercentage()}/>
-        </Section>
-    
-     
+        marginLeft: '20px',
+      }}
+    >
+      <Section title="Please leave feedback">
+        <FeedbackOptions
+          options={votes}
+          onLeaveFeedback={onBtnClick}
+        />
+      </Section>
+      <Section title="Statictics">
+        <Statistics
+          good={votes.good}
+          neutral={votes.neutral}
+          bad={votes.bad}
+          total={countTotalFeedback()}
+          positivePercentage={countPositiveFeedbackPercentage()}
+        />
+      </Section>
     </div>
-      )}
+  );
+};
 
-      countTotalFeedback = () => {
-        const total = Object.values(this.state).reduce((previousValue, number) => {
-          return previousValue + number;
-        }, 0)
-        return total
-      }
 
-      countPositiveFeedbackPercentage = () =>  {
-        const percentage = this.state['good']*100/this.countTotalFeedback();
-        return percentage;
-      }
 
-      onBtnClick = (property) => {
-        this.setState(prevState => {
-          const value = prevState[property];
-
-          return {
-              [property]: value + 1    
-          }
-      })
-      }
-
-  }
-
-  export default App;
+export default App;
