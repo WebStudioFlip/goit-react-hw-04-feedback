@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import Section from '../shared/Section';
 import Statistics from './Statistics';
 import FeedbackOptions from './FeedbackOptions';
@@ -23,6 +23,7 @@ const App = () => {
   };
   
   const onBtnClick = property => {
+    console.log("click")
     setVotes(prevState => {
       const value = prevState[property];  
       return {
@@ -30,7 +31,7 @@ const App = () => {
         [property]: value + 1,
       };
     });
-  };
+  }
 
   return (
     <div
@@ -49,7 +50,7 @@ const App = () => {
     >
       <Section title="Please leave feedback">
         <FeedbackOptions
-          options={votes}
+          options={Object.keys(votes)}
           onLeaveFeedback={onBtnClick}
         />
       </Section>

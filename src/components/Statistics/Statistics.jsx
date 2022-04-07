@@ -4,8 +4,7 @@ import style from './statistics.module.css'
 
 
 const Statistics =  (props) => {
-    const {good, neutral, bad, total, positivePercentage} = props
-    console.log(total)
+    const {good, neutral, bad, total, positivePercentage} = props    
     return (
         (total>0)?(
             <div>
